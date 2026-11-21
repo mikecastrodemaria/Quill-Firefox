@@ -198,10 +198,10 @@ const send = async (text, { attachPage = els.include.checked, display, tag = "",
                 const page = await readPage(currentTab, await maxPageChars());
                 content = `${formatPage(page)}\n\n${text}`;
                 conv.pageSent = url;
-                tag = tag || `📄 ${page.title || url}`;
+                tag = tag ? `${tag} · 📄 ${page.title || url}` : `📄 ${page.title || url}`;
             } catch (error) {
                 pageErrorNotice(error);
-                if (error.kind === "permission") retry = () => send(text, { attachPage, display, tag, fromInput });
+                if (error.kind === "permission") retry = () => send(text, { attachPage, display, tag, fromInput, images });
                 if (fromInput) els.input.value = text;
                 return;
             }
@@ -283,10 +283,12 @@ const sendImages = async (items, promptKey, labelKey, page) => {
     if (!loaded.length) return addBubble({ role: "error", content: t(lang, "errImageLoad") });
 
     const lines = loaded.map((img, n) => `Image ${n + 1}${img.alt ? ` (alt: "${img.alt.replace(/"/g, "'")}")` : ""}`);
-    const context = page?.url ? `\n\n[Page: ${page.title || ""} - ${page.url}]` : "";
+    // With "Page" on, the page text goes along so the model can relate images and text.
+    const withText = els.include.checked && !isRestricted(page?.url);
+    const context = !withText && page?.url ? `\n\n[Page: ${page.title || ""} - ${page.url}]` : "";
     const tag = `🖼 ${t(lang, loaded.length > 1 ? "nImages" : "oneImage", { n: loaded.length })}`;
-    return send(`${t(lang, promptKey)}\n\n${lines.join("\n")}${context}`, {
-        attachPage: false,
+    return send(`${t(lang, withText ? `${promptKey}Text` : promptKey)}\n\n${lines.join("\n")}${context}`, {
+        attachPage: withText,
         display: t(lang, labelKey),
         tag,
         images: loaded.map(({ mediaType, data }) => ({ mediaType, data }))

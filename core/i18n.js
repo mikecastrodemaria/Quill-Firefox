@@ -36,6 +36,8 @@ const strings = {
         pTranslateSel: "Translate the following text into English:\n\n{text}",
         pImage: "Describe this image in detail: what it shows, its context, notable details and any visible text.",
         pImages: "Describe these images from the page one by one, numbered in the order given: what each one shows, notable details, visible text, and how it relates to the page.",
+        pImageText: "Describe this image in detail (what it shows, notable details, visible text), then explain how it relates to the text of the page.",
+        pImagesText: "Describe these images from the page one by one, numbered in the order given, and relate each one to the text of the page: what it illustrates, its caption or role, and whether it agrees with or adds to the text. End with a short overview of the page combining text and images.",
         system: "You are Quill, an AI assistant living in the browser sidebar. Be concise and use Markdown. Answer in the user's language.",
         // Options
         optTitle: "Quill - Settings",
@@ -106,6 +108,8 @@ const strings = {
         pTranslateSel: "Traduis le texte suivant en français :\n\n{text}",
         pImage: "Décris cette image en détail : ce qu'elle montre, son contexte, les détails notables et le texte visible.",
         pImages: "Décris ces images de la page une par une, numérotées dans l'ordre donné : ce que montre chacune, les détails notables, le texte visible et le lien avec la page.",
+        pImageText: "Décris cette image en détail (ce qu'elle montre, détails notables, texte visible), puis explique son lien avec le texte de la page.",
+        pImagesText: "Décris ces images de la page une par une, numérotées dans l'ordre donné, et relie chacune au texte de la page : ce qu'elle illustre, sa légende ou son rôle, et si elle confirme ou complète le texte. Termine par une courte synthèse de la page combinant texte et images.",
         system: "Tu es Quill, un assistant IA intégré à la barre latérale du navigateur. Sois concis et utilise le Markdown. Réponds dans la langue de l'utilisateur.",
         optTitle: "Quill - Options",
         optSubtitle: "Barre latérale IA pour Firefox",

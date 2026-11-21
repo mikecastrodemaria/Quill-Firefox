@@ -18,7 +18,7 @@ Full specification: [SPECIFICATION.md](SPECIFICATION.md). Chromium version: [Qui
 - "Current page" card (favicon, title, URL) following the active tab
 - **Page** toggle: attaches the page title, URL and text to your message (once per page)
 - Quick actions: Summarize, Key points, Translate, Explain selection, **Images**
-- **Image description** (v0.2): the **Images** button sends the main images of the page (up to 4, icons skipped) to a vision model; right click an image → "Quill: describe this image". Images are resized to 1024 px and never stored. Needs a vision model: Claude, gpt-4o, OVHcloud Mistral-Small-3.2, Ollama gemma / llava / qwen2.5vl…
+- **Image description** (v0.2): the **Images** button sends the main images of the page (up to 4, icons skipped) to a vision model; right click an image → "Quill: describe this image". With **Page** on, the page text is sent too, so the answer relates each image to the article. Images are resized to 1024 px and never stored. Needs a vision model: Claude, gpt-4o, OVHcloud Mistral-Small-3.2, Ollama gemma / llava / qwen2.5vl…
 - Right click: "Quill: summarize this page", "explain / translate the selection", "describe this image"
 - Options page: API keys, endpoint URLs, live model lists, connection test, FR/EN interface, limits
 
