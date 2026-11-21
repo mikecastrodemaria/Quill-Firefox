@@ -129,6 +129,32 @@ Useful if the reviewer asks.
 
 Screenshots can be added after submission from **Edit Product Page → Images**.
 
+**Screenshot captions** — AMO has a caption field under each screenshot:
+
+`screenshots/1-summarize.png`
+
+```
+Summarize the page you are reading in one click, right in the Firefox sidebar.
+```
+
+`screenshots/2-explain-selection.png`
+
+```
+Select a passage and ask Quill to explain it in plain words, from the sidebar or the right-click menu.
+```
+
+`screenshots/3-options.png`
+
+```
+Choose your AI provider: Claude, OpenAI, OVHcloud AI Endpoints (free anonymous tier) or Ollama running locally.
+```
+
+`screenshots/4-images.png`
+
+```
+New in 0.2: describe the images of a page. With "Page" on, Quill relates each picture to the article.
+```
+
 ## 6. After submission
 
 - The add-on is signed automatically, then may get a manual review (hours to a few days).
