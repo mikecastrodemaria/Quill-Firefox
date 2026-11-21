@@ -102,7 +102,7 @@ Useful if the reviewer asks.
 | Asset | Size | Status |
 |---|---|---|
 | Add-on icon | 128×128 PNG | ✅ `images/icon-128px.png` (taken from the manifest) |
-| Screenshots | 1280×800 recommended (min 600×375), PNG/JPG | To do: sidebar with an answer, options page, context menu |
+| Screenshots | 1280×800 recommended (min 600×375), PNG/JPG | ✅ `screenshots/1-summarize.png`, `2-explain-selection.png`, `3-options.png` |
 
 Screenshots can be added after submission from **Edit Product Page → Images**.
 

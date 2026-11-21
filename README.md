@@ -4,6 +4,12 @@ The Quill chat in a Firefox **sidebar** (which you can put on the right), with t
 
 Full specification: [SPECIFICATION.md](SPECIFICATION.md). Chromium version: [Quill-Chrome](https://github.com/mikecastrodemaria/Quill-Chrome).
 
+![Quill summarizing the current page in the sidebar](screenshots/1-summarize.png)
+
+| Explain a selection | Settings |
+|---|---|
+| ![Explain the selected text](screenshots/2-explain-selection.png) | ![Options page](screenshots/3-options.png) |
+
 ## v0.1 features
 
 - Sidebar toggled from the Quill toolbar button or `Alt+Shift+Q`
@@ -43,7 +49,7 @@ npx web-ext run --source-dir .
 ```
 
 ```powershell
-npx web-ext lint --source-dir . --ignore-files "*.md"
+npx web-ext lint --source-dir . --ignore-files "*.md" "screenshots" "screenshots/**"
 ```
 
 `web-ext run` starts a clean Firefox profile with the add-on installed and reloads it on every file change.
@@ -112,7 +118,7 @@ Quill-Firefox/
 ### Unsigned package (testing)
 
 ```powershell
-npx web-ext build --source-dir . --ignore-files "*.md" ".gitignore" --overwrite-dest --filename "quill-firefox-{version}.xpi"
+npx web-ext build --source-dir . --ignore-files "*.md" ".gitignore" "screenshots" "screenshots/**" --overwrite-dest --filename "quill-firefox-{version}.xpi"
 ```
 
 Produces `web-ext-artifacts/quill-firefox-<version>.xpi`. Release Firefox only accepts it as a temporary add-on; Developer Edition / Nightly accept it permanently with `xpinstall.signatures.required = false`.
@@ -125,7 +131,7 @@ Produces `web-ext-artifacts/quill-firefox-<version>.xpi`. Release Firefox only a
    ```powershell
    $env:WEB_EXT_API_KEY = Read-Host "JWT issuer"
    $env:WEB_EXT_API_SECRET = Read-Host "JWT secret"
-   npx web-ext sign --source-dir . --channel unlisted --ignore-files "*.md" ".gitignore"
+   npx web-ext sign --source-dir . --channel unlisted --ignore-files "*.md" ".gitignore" "screenshots" "screenshots/**"
    ```
 4. Mozilla validates and signs the add-on (usually a few minutes); the signed `.xpi` is downloaded into `web-ext-artifacts/`.
 5. Install it in any Firefox ≥ 140: drag the `.xpi` onto a Firefox window, or `about:addons` → ⚙ → **Install Add-on From File…**.
