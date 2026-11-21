@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n="optTitle">Quill - Settings</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="page">
+        <header class="head">
+            <img src="../images/icon-64px.png" alt="" width="44" height="44">
+            <div>
+                <h1>Quill</h1>
+                <p class="muted small" data-i18n="optSubtitle">AI sidebar for Firefox</p>
+            </div>
+            <span id="saved" class="saved small" data-i18n="optSaved" hidden>Saved</span>
+        </header>
+
+        <section>
+            <h2 data-i18n="optGeneral">General</h2>
+            <div class="card">
+                <div class="field">
+                    <label for="active" data-i18n="optActive">Active provider</label>
+                    <select id="active"></select>
+                </div>
+                <div class="field">
+                    <label for="language" data-i18n="optLanguage">Interface language</label>
+                    <select id="language"></select>
+                </div>
+                <div class="field">
+                    <label for="max-tokens" data-i18n="optMaxTokens">Max answer length</label>
+                    <select id="max-tokens">
+                        <option value="1024">1024</option>
+                        <option value="2048">2048</option>
+                        <option value="4096">4096</option>
+                        <option value="8192">8192</option>
+                        <option value="16384">16384</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="max-page" data-i18n="optMaxPage">Max page content</label>
+                    <input type="number" id="max-page" min="1000" step="1000">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 data-i18n="optProviders">Providers</h2>
+            <p class="muted small" data-i18n="optProvidersHelp"></p>
+            <div id="providers"></div>
+        </section>
+    </div>
+
+    <template id="provider-tpl">
+        <div class="card provider">
+            <div class="provider-head">
+                <strong class="p-label"></strong>
+                <label class="check"><input type="checkbox" class="p-enabled"> <span data-i18n="optEnabled">Enabled</span></label>
+            </div>
+            <div class="provider-body">
+                <div class="field p-key-field">
+                    <label><span data-i18n="optApiKey">API key</span> · <a class="p-key-link" target="_blank" rel="noopener noreferrer" data-i18n="optGetKey">Get a key</a></label>
+                    <input type="password" class="p-key" autocomplete="off" spellcheck="false">
+                    <p class="hint muted small p-key-hint" hidden></p>
+                </div>
+                <div class="field p-url-field">
+                    <label data-i18n="optUrl">Endpoint URL</label>
+                    <input type="text" class="p-url" spellcheck="false">
+                    <p class="hint muted small p-url-hint" hidden></p>
+                </div>
+                <div class="field">
+                    <label data-i18n="optModel">Model</label>
+                    <div class="row">
+                        <select class="p-model"></select>
+                        <button class="btn p-load" data-i18n="optLoadModels">Load models</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn p-test" data-i18n="optTest">Test connection</button>
+                    <span class="p-status small"></span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script type="module" src="options.js"></script>
+</body>
+</html>

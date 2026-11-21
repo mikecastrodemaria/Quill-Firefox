@@ -1,0 +1,20 @@
+{
+  "extensionName": {
+    "message": "Quill - barre latérale IA"
+  },
+  "extensionDescription": {
+    "message": "Discutez avec Claude, OpenAI, OVHcloud AI Endpoints ou Ollama dans une barre latérale, et interagissez avec la page consultée."
+  },
+  "actionTitle": {
+    "message": "Ouvrir Quill"
+  },
+  "menuSummarize": {
+    "message": "Quill : résumer cette page"
+  },
+  "menuExplain": {
+    "message": "Quill : expliquer la sélection"
+  },
+  "menuTranslate": {
+    "message": "Quill : traduire la sélection"
+  }
+}

@@ -1,0 +1,31 @@
+body { background: var(--bg-soft); }
+.page { max-width: 680px; margin: 0 auto; padding: 24px 16px 48px; }
+.head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.head h1 { margin: 0; font-size: 20px; }
+.head p { margin: 2px 0 0; }
+.saved { margin-left: auto; color: var(--ok); }
+h2 { font-size: 14px; margin: 22px 0 6px; }
+section > p { margin: 0 0 8px; }
+
+.card {
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+.field { margin-bottom: 12px; }
+.field:last-child { margin-bottom: 0; }
+.field label { display: block; margin-bottom: 4px; font-weight: 600; }
+.field label a { font-weight: 400; }
+.hint { margin: 4px 0 0; }
+.row { display: flex; align-items: center; gap: 8px; }
+.row select { flex: 1; }
+.row .btn { flex: none; }
+
+.provider-head { display: flex; align-items: center; justify-content: space-between; }
+.provider-body { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.provider:not(.on) .provider-body { display: none; }
+.check { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.p-status.ok { color: var(--ok); }
+.p-status.err { color: var(--danger); }

@@ -1,0 +1,94 @@
+/* Quill Chrome - shared tokens and controls. Follows the system light/dark theme. */
+
+:root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --bg-soft: #f4f4f6;
+    --bg-hover: #e9e9ee;
+    --border: #d7d7de;
+    --text: #1c1b22;
+    --text-soft: #5b5b66;
+    --accent: #c2630a;
+    --accent-hover: #a85408;
+    --accent-soft: rgba(217, 119, 6, 0.14);
+    --on-accent: #ffffff;
+    --danger: #c5283d;
+    --ok: #1a7f4b;
+    --radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #202124;
+        --bg-soft: #292a2d;
+        --bg-hover: #35363a;
+        --border: #45464a;
+        --text: #f1f1f4;
+        --text-soft: #a9a9b6;
+        --accent: #f59e0b;
+        --accent-hover: #fbbf24;
+        --accent-soft: rgba(245, 158, 11, 0.16);
+        --on-accent: #1c1b22;
+        --danger: #ff6b7d;
+        --ok: #4ade80;
+    }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 13px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+a { color: var(--accent); }
+.muted { color: var(--text-soft); }
+.small { font-size: 12px; }
+
+input[type="text"], input[type="password"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 5px 8px;
+    font: inherit;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    min-height: 30px;
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px 12px;
+    min-height: 30px;
+    font: inherit;
+    color: var(--text);
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+.btn:hover:not(:disabled) { background: var(--bg-hover); }
+.btn:disabled { opacity: .55; cursor: default; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn.primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+.spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+    vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

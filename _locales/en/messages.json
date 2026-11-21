@@ -1,0 +1,20 @@
+{
+  "extensionName": {
+    "message": "Quill - AI sidebar"
+  },
+  "extensionDescription": {
+    "message": "Chat with Claude, OpenAI, OVHcloud AI Endpoints or Ollama in a sidebar, and talk with the page you are reading."
+  },
+  "actionTitle": {
+    "message": "Open Quill"
+  },
+  "menuSummarize": {
+    "message": "Quill: summarize this page"
+  },
+  "menuExplain": {
+    "message": "Quill: explain the selection"
+  },
+  "menuTranslate": {
+    "message": "Quill: translate the selection"
+  }
+}

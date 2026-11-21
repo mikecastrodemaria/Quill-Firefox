@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quill</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+    <header class="bar">
+        <img class="logo" src="../images/icon-32px.png" alt="">
+        <strong class="brand">Quill</strong>
+        <select id="provider" aria-label="Provider"></select>
+        <button id="new-chat" class="icon-btn" data-i18n-title="newChat" aria-label="New conversation">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </button>
+        <button id="open-settings" class="icon-btn" data-i18n-title="settings" aria-label="Settings">
+            <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+    </header>
+
+    <section class="page-card" id="page-card">
+        <div class="page-row">
+            <img id="page-icon" class="favicon" alt="" hidden>
+            <div class="page-meta">
+                <div id="page-title" class="page-title" data-i18n="pageNone">No page</div>
+                <div id="page-url" class="page-url muted small"></div>
+            </div>
+            <label class="switch" data-i18n-title="includePageTitle">
+                <input type="checkbox" id="include-page">
+                <span class="slider" aria-hidden="true"></span>
+                <span class="small" data-i18n="includePage">Page</span>
+            </label>
+        </div>
+        <div id="page-notice" class="page-notice small" hidden>
+            <span id="page-notice-text"></span>
+            <button id="grant-access" class="btn small-btn" data-i18n="pageGrant" hidden>Allow</button>
+        </div>
+        <div class="actions">
+            <button class="chip-btn" data-action="summarize" data-i18n="actSummarize">Summarize</button>
+            <button class="chip-btn" data-action="keypoints" data-i18n="actKeyPoints">Key points</button>
+            <button class="chip-btn" data-action="translate" data-i18n="actTranslate">Translate</button>
+            <button class="chip-btn" data-action="explain" data-i18n="actExplain">Explain selection</button>
+        </div>
+    </section>
+
+    <main id="messages" class="messages" aria-live="polite"></main>
+
+    <footer class="composer">
+        <textarea id="input" rows="2" data-i18n-placeholder="placeholder"></textarea>
+        <button id="send" class="btn primary send-btn" data-i18n-title="send" aria-label="Send">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+    </footer>
+
+    <script type="module" src="sidebar.js"></script>
+</body>
+</html>
