@@ -125,7 +125,7 @@ Useful if the reviewer asks.
 | Asset | Size | Status |
 |---|---|---|
 | Add-on icon | 128×128 PNG | ✅ `images/icon-128px.png` (taken from the manifest) |
-| Screenshots | 1280×800 recommended (min 600×375), PNG/JPG | ✅ `screenshots/1-summarize.png`, `2-explain-selection.png`, `3-options.png` |
+| Screenshots | 1280×800 recommended (min 600×375), PNG/JPG | ✅ `screenshots/1-summarize.png`, `2-explain-selection.png`, `3-options.png`, `4-images.png` (v0.2) |
 
 Screenshots can be added after submission from **Edit Product Page → Images**.
 
