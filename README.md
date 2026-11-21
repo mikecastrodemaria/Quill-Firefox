@@ -130,12 +130,10 @@ Produces `web-ext-artifacts/quill-firefox-<version>.xpi`. Release Firefox only a
 ### Signed package (self-distribution, not listed on AMO)
 
 1. Get your API credentials at <https://addons.mozilla.org/developers/addon/api/key/> (JWT issuer + JWT secret). Never commit them.
-2. Bump `version` in `manifest.json` if this version was already signed (AMO refuses to sign the same version twice).
-3. Run, in PowerShell:
+2. Bump `version` in `manifest.json` if this version was already uploaded to AMO, listed or not (AMO answers `409 Version x already exists`).
+3. Run, in PowerShell, from the repository root (the secret is typed hidden and cleared afterwards):
    ```powershell
-   $env:WEB_EXT_API_KEY = Read-Host "JWT issuer"
-   $env:WEB_EXT_API_SECRET = Read-Host "JWT secret"
-   npx web-ext sign --source-dir . --channel unlisted --ignore-files "*.md" ".gitignore" "screenshots" "screenshots/**"
+   cd D:\Github\Quill-Firefox; $env:WEB_EXT_API_KEY = Read-Host "JWT issuer"; $env:WEB_EXT_API_SECRET = [Net.NetworkCredential]::new("", (Read-Host "JWT secret" -AsSecureString)).Password; npx web-ext sign --source-dir . --channel unlisted --ignore-files "*.md" ".gitignore" "screenshots" "screenshots/**"; Remove-Item Env:WEB_EXT_API_SECRET
    ```
 4. Mozilla validates and signs the add-on (usually a few minutes); the signed `.xpi` is downloaded into `web-ext-artifacts/`.
 5. Install it in any Firefox ≥ 140: drag the `.xpi` onto a Firefox window, or `about:addons` → ⚙ → **Install Add-on From File…**.

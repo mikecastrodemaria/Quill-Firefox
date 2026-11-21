@@ -65,10 +65,10 @@ Quill does not collect, store or transmit any data to its developers. API keys a
 
 ## 3. Version
 
-**Release notes (0.2.0)** — paste in **Version notes** when uploading the new version
+**Release notes (0.2.1)** — paste in **Version notes** when uploading the new version
 
 ```
-Version 0.2.0 - Describe the images of a page
+Version 0.2.1 - Describe the images of a page
 
 - New "Images" button: Quill sends the main images of the page (up to 4, small icons skipped) to your AI model and describes them, including any visible text such as chart titles and figures.
 - Turn on "Page" first to send the page text with the images: the answer relates each image to the article and ends with an overview.
@@ -78,10 +78,10 @@ Version 0.2.0 - Describe the images of a page
 - Fix: a request retried after granting page access keeps its images.
 ```
 
-**Notes to reviewer (0.2.0)**
+**Notes to reviewer (0.2.1)**
 
 ```
-Version 0.2.0 adds image description. No new permission: manifest.json only changes its version number. The new right-click entry uses the "image" context of the existing menus permission.
+Version 0.2.1 adds image description. No new permission: manifest.json only changes its version number. The new right-click entry uses the "image" context of the existing menus permission.
 
 To test without an account: enable "OVHcloud AI Endpoints" in the options (no API key needed, model Mistral-Small-3.2-24B-Instruct-2506 reads images) and make it the active provider. Open an article with pictures, then click "Images" in the sidebar, or right click a picture and choose "Quill: describe this image".
 
