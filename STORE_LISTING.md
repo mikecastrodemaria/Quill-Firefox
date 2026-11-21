@@ -101,7 +101,7 @@ Useful if the reviewer asks.
 
 | Asset | Size | Status |
 |---|---|---|
-| Add-on icon | 128×128 PNG (64×64 accepted) | ⚠️ only 64 px exists — a 128 px icon would look sharper |
+| Add-on icon | 128×128 PNG | ✅ `images/icon-128px.png` (taken from the manifest) |
 | Screenshots | 1280×800 recommended (min 600×375), PNG/JPG | To do: sidebar with an answer, options page, context menu |
 
 Screenshots can be added after submission from **Edit Product Page → Images**.

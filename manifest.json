@@ -13,12 +13,18 @@
       "data_collection_permissions": {
         "required": ["websiteContent", "browsingActivity"]
       }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
     }
   },
   "icons": {
     "16": "images/icon-16px.png",
     "32": "images/icon-32px.png",
-    "64": "images/icon-64px.png"
+    "48": "images/icon-48px.png",
+    "64": "images/icon-64px.png",
+    "96": "images/icon-96px.png",
+    "128": "images/icon-128px.png"
   },
   "action": {
     "default_title": "__MSG_actionTitle__",
