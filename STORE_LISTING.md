@@ -65,7 +65,7 @@ Quill does not collect, store or transmit any data to its developers. API keys a
 
 ## 3. Version
 
-**Release notes (0.1.0)**
+**Release notes (0.1.1)** — first public version (0.1.0 was only an upload test)
 
 ```
 First release: AI chat in the sidebar with 4 providers, current-page context, quick actions and context menu.
