@@ -140,6 +140,7 @@ const updatePage = async () => {
     if (!els.pageIcon.hidden) els.pageIcon.src = icon;
 
     els.include.disabled = restricted;
+    els.include.closest("label").title = restricted ? t(lang, "pageRestricted") : t(lang, "includePageTitle");
     els.actions.forEach(b => { b.disabled = busy || restricted; });
     if (restricted && url) showNotice(t(lang, "pageRestricted"));
     else els.notice.hidden = true;

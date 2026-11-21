@@ -33,7 +33,7 @@ The goal is to offer **the same AI building block in Mozilla Firefox** as a **si
 
 ### In scope
 
-- **Manifest V3** Firefox add-on (Firefox ≥ 128, desktop; Firefox-based browsers such as LibreWolf, Floorp, Zen).
+- **Manifest V3** Firefox add-on (Firefox ≥ 140, desktop; Firefox-based browsers such as LibreWolf, Floorp, Zen).
 - Sidebar: chat, page context, quick actions.
 - Options page: providers, models, limits, language.
 - Context menu (right click) on the page and on a selection.
@@ -155,7 +155,7 @@ Priorities: **P0** = v0.1 (MVP), **P1** = v0.2–v0.5, **P2** = v1.0+.
 - **NF-04** Least privilege: `host_permissions` limited to the provider APIs; site access is an **optional permission** (`optional_host_permissions`) requested on first use.
 - **NF-05** Answer rendering: systematic HTML escaping before Markdown formatting, parsed with `DOMParser` (no `innerHTML` with dynamic data); links open with `rel="noopener noreferrer"`; default MV3 CSP (no `eval`, no remote code).
 - **NF-06** Page content is treated as **data**: wrapped in `<page>…</page>` and the system prompt tells the model never to follow instructions found inside it (prompt-injection mitigation).
-- **NF-07** Published privacy policy (required by addons.mozilla.org), and the `data_collection_permissions` manifest key declared before AMO submission.
+- **NF-07** Published privacy policy (required by addons.mozilla.org), and the `data_collection_permissions` manifest key (`websiteContent`, `browsingActivity`), shown by Firefox's built-in consent at install.
 
 ### 5.2 Performance
 
@@ -165,7 +165,7 @@ Priorities: **P0** = v0.1 (MVP), **P1** = v0.2–v0.5, **P2** = v1.0+.
 
 ### 5.3 Compatibility
 
-- **NF-20** Firefox ≥ 128 (MV3 with `scripting`, `storage.session`, `optional_host_permissions`).
+- **NF-20** Firefox ≥ 140 (built-in data collection consent; MV3 with `scripting`, `storage.session`, `optional_host_permissions`).
 - **NF-21** Ollama requires `OLLAMA_ORIGINS=moz-extension://*` (documented).
 
 ### 5.4 Accessibility / UX

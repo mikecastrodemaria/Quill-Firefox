@@ -62,6 +62,9 @@ body { display: flex; flex-direction: column; min-width: 280px; }
 }
 .switch input:checked + .slider { background: var(--accent); }
 .switch input:checked + .slider::after { transform: translateX(13px); }
+.switch:has(input:disabled) { opacity: .45; cursor: not-allowed; }
+.switch input:disabled + .slider { background: var(--border); }
+.switch input:disabled + .slider::after { transform: none; }
 .switch input:focus-visible + .slider { outline: 2px solid var(--accent); outline-offset: 1px; }
 
 .page-notice {

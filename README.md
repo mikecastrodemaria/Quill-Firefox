@@ -15,7 +15,7 @@ Full specification: [SPECIFICATION.md](SPECIFICATION.md). Chromium version: [Qui
 - Right click: "Quill: summarize this page", "explain / translate the selection"
 - Options page: API keys, endpoint URLs, live model lists, connection test, FR/EN interface, limits
 
-Requires **Firefox 128 or later** (desktop).
+Requires **Firefox 140 or later** (desktop) — the first version with Firefox's built-in data collection consent.
 
 ## Install / test
 
@@ -113,7 +113,7 @@ Quill-Firefox/
 npx web-ext build --source-dir . --ignore-files "*.md"
 ```
 
-Before submitting to addons.mozilla.org, add the `data_collection_permissions` key under `browser_specific_settings.gecko` in `manifest.json` (now required by AMO) and publish a privacy policy.
+`manifest.json` declares `data_collection_permissions` (required by addons.mozilla.org): `websiteContent` and `browsingActivity`, because the text and URL of a page are sent to the AI provider you configured when you use **Page** or a quick action. Firefox shows this at install time. Publish a privacy policy before submitting to AMO.
 
 ## License
 
