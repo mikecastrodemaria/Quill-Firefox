@@ -6,6 +6,7 @@ import { PROVIDERS, loadProviderState, getActiveProviderConfig, setActiveProvide
 import { getLanguage, t, applyI18n, formatError, PAGE_RULES } from '../core/i18n.js';
 import { getActiveTab, isRestricted, readPage, requestPageAccess, formatPage } from '../core/page.js';
 import { renderMarkdown } from '../core/markdown.js';
+import { listPageImages, missingAccess, loadImages } from '../core/images.js';
 
 const DEFAULT_PAGE_CHARS = 20000;
 const $ = (id) => document.getElementById(id);
@@ -75,6 +76,17 @@ const addBubble = (m) => {
         setMarkdown(div, m.content);
     } else {
         div.textContent = m.display ?? m.content;
+        if (m.images?.length) {
+            const thumbs = document.createElement("div");
+            thumbs.className = "thumbs";
+            for (const i of m.images) {
+                const img = document.createElement("img");
+                img.src = `data:${i.mediaType};base64,${i.data}`;
+                img.alt = "";
+                thumbs.appendChild(img);
+            }
+            div.appendChild(thumbs);
+        }
         if (m.tag) {
             const tag = document.createElement("span");
             tag.className = "tag";
@@ -95,7 +107,10 @@ const renderAll = () => {
 
 const clearTransient = () => els.messages.querySelectorAll(".msg.error, .msg.info").forEach(el => el.remove());
 
-const saveConv = () => browser.storage.session.set({ conversation: conv });
+// Images stay in memory only (storage.session is small): a reopened panel shows the tag.
+const saveConv = () => browser.storage.session.set({
+    conversation: { ...conv, messages: conv.messages.map(({ images, ...m }) => m) }
+});
 
 const setBusy = (value) => {
     busy = value;
@@ -165,8 +180,9 @@ const systemPrompt = () => `${t(lang, "system")}\n\n${PAGE_RULES[lang] || PAGE_R
  * attachPage:  join the current page's content (once per page)
  * display/tag: what the user bubble shows
  * fromInput:   restore the text into the input box on failure
+ * images:      [{ mediaType, data }] sent with the message (vision models)
  */
-const send = async (text, { attachPage = els.include.checked, display, tag = "", fromInput = false } = {}) => {
+const send = async (text, { attachPage = els.include.checked, display, tag = "", fromInput = false, images } = {}) => {
     text = text.trim();
     if (!text || busy) return;
     clearTransient();
@@ -195,6 +211,7 @@ const send = async (text, { attachPage = els.include.checked, display, tag = "",
     }
 
     const userMsg = { role: "user", content, display: display ?? text, tag };
+    if (images?.length) userMsg.images = images;
     conv.messages.push(userMsg);
     const userBubble = addBubble(userMsg);
     if (fromInput) { els.input.value = ""; autosize(); }
@@ -226,7 +243,9 @@ const send = async (text, { attachPage = els.include.checked, display, tag = "",
         userBubble.remove();
         pending.remove();
         if (fromInput) els.input.value = text;
-        addBubble({ role: "error", content: formatError(lang, error, config.label) });
+        let message = formatError(lang, error, config.label);
+        if (images?.length && error.kind === "http") message += `\n\n${t(lang, "errVision", { m: config.model || "" })}`;
+        addBubble({ role: "error", content: message });
     } finally {
         setBusy(false);
         els.input.focus();
@@ -241,6 +260,39 @@ const sendSelection = (selection, promptKey, labelKey) => {
     });
 };
 
+// Loads the images, then asks about them. items: [{ src, alt }]
+const sendImages = async (items, promptKey, labelKey, page) => {
+    if (busy) return;
+    clearTransient();
+    retry = null;
+    setBusy(true);
+    let loaded;
+    try {
+        loaded = await loadImages(items);
+    } finally {
+        setBusy(false);
+    }
+    if (loaded.length < items.length) {
+        const failed = items.filter(i => !loaded.some(l => l.src === i.src)).map(i => i.src);
+        if (await missingAccess(failed)) {
+            showNotice(t(lang, "imagesNeedAccess"), true);
+            retry = () => sendImages(items, promptKey, labelKey, page);
+            return;
+        }
+    }
+    if (!loaded.length) return addBubble({ role: "error", content: t(lang, "errImageLoad") });
+
+    const lines = loaded.map((img, n) => `Image ${n + 1}${img.alt ? ` (alt: "${img.alt.replace(/"/g, "'")}")` : ""}`);
+    const context = page?.url ? `\n\n[Page: ${page.title || ""} - ${page.url}]` : "";
+    const tag = `🖼 ${t(lang, loaded.length > 1 ? "nImages" : "oneImage", { n: loaded.length })}`;
+    return send(`${t(lang, promptKey)}\n\n${lines.join("\n")}${context}`, {
+        attachPage: false,
+        display: t(lang, labelKey),
+        tag,
+        images: loaded.map(({ mediaType, data }) => ({ mediaType, data }))
+    });
+};
+
 const PAGE_ACTIONS = {
     summarize: ["pSummarize", "actSummarize"],
     keypoints: ["pKeyPoints", "actKeyPoints"],
@@ -251,6 +303,21 @@ const runAction = async (action) => {
     if (PAGE_ACTIONS[action]) {
         const [promptKey, labelKey] = PAGE_ACTIONS[action];
         return send(t(lang, promptKey), { attachPage: true, display: t(lang, labelKey) });
+    }
+    if (action === "images") {
+        clearTransient();
+        const tab = await getActiveTab();
+        let items;
+        try {
+            if (isRestricted(tab?.url)) throw Object.assign(new Error("restricted"), { kind: "restricted" });
+            items = await listPageImages(tab);
+        } catch (error) {
+            pageErrorNotice(error);
+            if (error.kind === "permission") retry = () => runAction(action);
+            return;
+        }
+        if (!items.length) return addBubble({ role: "info", content: t(lang, "noImages") });
+        return sendImages(items, items.length > 1 ? "pImages" : "pImage", "actImages", tab);
     }
     if (action === "explain") {
         clearTransient();
@@ -274,6 +341,7 @@ const handlePending = async (req) => {
     await browser.storage.session.remove("pendingRequest");
     await updatePage();
     if (req.action === "summarize") return runAction("summarize");
+    if (req.action === "image" && req.src) return sendImages([{ src: req.src, alt: "" }], "pImage", "actImage", currentTab);
     if (req.action === "explain" && req.text) return sendSelection(req.text, "pExplain", "actExplain");
     if (req.action === "translate" && req.text) return sendSelection(req.text, "pTranslateSel", "actTranslate");
 };

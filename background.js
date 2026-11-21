@@ -5,7 +5,8 @@
 const MENUS = [
     { id: "quill-summarize", contexts: ["page"], title: "menuSummarize" },
     { id: "quill-explain", contexts: ["selection"], title: "menuExplain" },
-    { id: "quill-translate", contexts: ["selection"], title: "menuTranslate" }
+    { id: "quill-translate", contexts: ["selection"], title: "menuTranslate" },
+    { id: "quill-image", contexts: ["image"], title: "menuImage" }
 ];
 
 const setup = async () => {
@@ -29,6 +30,7 @@ browser.menus.onClicked.addListener((info, tab) => {
         pendingRequest: {
             action: String(info.menuItemId).replace("quill-", ""),
             text: info.selectionText || "",
+            src: info.srcUrl || "",
             tabId: tab?.id,
             ts: Date.now()
         }

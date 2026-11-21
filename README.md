@@ -17,8 +17,9 @@ Full specification: [SPECIFICATION.md](SPECIFICATION.md). Chromium version: [Qui
 - Providers: **Anthropic (Claude)**, **OpenAI**, **OVHcloud AI Endpoints**, **Ollama** (local), switchable from the sidebar header
 - "Current page" card (favicon, title, URL) following the active tab
 - **Page** toggle: attaches the page title, URL and text to your message (once per page)
-- Quick actions: Summarize, Key points, Translate, Explain selection
-- Right click: "Quill: summarize this page", "explain / translate the selection"
+- Quick actions: Summarize, Key points, Translate, Explain selection, **Images**
+- **Image description** (v0.2): the **Images** button sends the main images of the page (up to 4, icons skipped) to a vision model; right click an image → "Quill: describe this image". Images are resized to 1024 px and never stored. Needs a vision model: Claude, gpt-4o, OVHcloud Mistral-Small-3.2, Ollama gemma / llava / qwen2.5vl…
+- Right click: "Quill: summarize this page", "explain / translate the selection", "describe this image"
 - Options page: API keys, endpoint URLs, live model lists, connection test, FR/EN interface, limits
 
 Requires **Firefox 140 or later** (desktop) — the first version with Firefox's built-in data collection consent.
@@ -66,6 +67,8 @@ npx web-ext lint --source-dir . --ignore-files "*.md" "screenshots" "screenshots
 | 6 | Open `about:preferences` | "This page can't be read", chat still works |
 | 7 | Change the provider in the header | The next answer comes from that provider |
 | 8 | Enter a wrong API key and ask something | Clear error message, the question stays in the input |
+| 9 | With a vision model, open an article with pictures → **Images** | Thumbnails in your message, then a description of each image |
+| 10 | Right click a picture → **Quill: describe this image** | The sidebar opens and describes that image |
 
 **Debugging:** `about:debugging` → Quill → **Inspect** opens the DevTools for the add-on (background, sidebar and options pages).
 
@@ -104,6 +107,7 @@ Quill-Firefox/
 │   ├── providers.js     ⇐ copy of plugin/html/providers.js from Quill
 │   ├── compat.js        fallback shim (Firefox already has `browser.*`)
 │   ├── page.js          reads the active tab
+│   ├── images.js        finds, loads and resizes page images (shared)
 │   ├── markdown.js      safe Markdown renderer
 │   └── i18n.js          FR / EN strings
 ├── sidebar/             sidebar UI

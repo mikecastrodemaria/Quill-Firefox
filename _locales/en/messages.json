@@ -16,5 +16,8 @@
   },
   "menuTranslate": {
     "message": "Quill: translate the selection"
+  },
+  "menuImage": {
+    "message": "Quill: describe this image"
   }
 }

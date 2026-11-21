@@ -15,6 +15,12 @@ const strings = {
         actKeyPoints: "Key points",
         actTranslate: "Translate",
         actExplain: "Explain selection",
+        actImages: "Images",
+        actImage: "Describe this image",
+        noImages: "No large enough image found on this page.",
+        imagesNeedAccess: "Quill needs permission to load the images of this page.",
+        oneImage: "1 image",
+        nImages: "{n} images",
         placeholder: "Ask anything about this page… (Enter to send)",
         send: "Send",
         copy: "Copy",
@@ -28,6 +34,8 @@ const strings = {
         pTranslate: "Translate the main content of this page into English. Keep the structure.",
         pExplain: "Explain the following selected text clearly and simply:\n\n{text}",
         pTranslateSel: "Translate the following text into English:\n\n{text}",
+        pImage: "Describe this image in detail: what it shows, its context, notable details and any visible text.",
+        pImages: "Describe these images from the page one by one, numbered in the order given: what each one shows, notable details, visible text, and how it relates to the page.",
         system: "You are Quill, an AI assistant living in the browser sidebar. Be concise and use Markdown. Answer in the user's language.",
         // Options
         optTitle: "Quill - Settings",
@@ -60,7 +68,9 @@ const strings = {
         errNetworkOllama: "Can't reach Ollama. Is it running, with OLLAMA_ORIGINS=moz-extension://* ?",
         errTimeout: "{p} took too long to answer.",
         errEmpty: "{p} returned an empty answer.",
-        errHttp: "{p} error (HTTP {s})."
+        errHttp: "{p} error (HTTP {s}).",
+        errVision: "The model **{m}** may not read images: choose a vision model (Claude, gpt-4o, Mistral-Small-3.2, gemma, llava…).",
+        errImageLoad: "The images could not be loaded."
     },
     fr: {
         newChat: "Nouvelle conversation",
@@ -76,6 +86,12 @@ const strings = {
         actKeyPoints: "Points clés",
         actTranslate: "Traduire",
         actExplain: "Expliquer la sélection",
+        actImages: "Images",
+        actImage: "Décrire cette image",
+        noImages: "Aucune image assez grande sur cette page.",
+        imagesNeedAccess: "Quill a besoin de l'autorisation de charger les images de cette page.",
+        oneImage: "1 image",
+        nImages: "{n} images",
         placeholder: "Posez une question sur cette page… (Entrée pour envoyer)",
         send: "Envoyer",
         copy: "Copier",
@@ -88,6 +104,8 @@ const strings = {
         pTranslate: "Traduis le contenu principal de cette page en français. Conserve la structure.",
         pExplain: "Explique clairement et simplement le texte sélectionné suivant :\n\n{text}",
         pTranslateSel: "Traduis le texte suivant en français :\n\n{text}",
+        pImage: "Décris cette image en détail : ce qu'elle montre, son contexte, les détails notables et le texte visible.",
+        pImages: "Décris ces images de la page une par une, numérotées dans l'ordre donné : ce que montre chacune, les détails notables, le texte visible et le lien avec la page.",
         system: "Tu es Quill, un assistant IA intégré à la barre latérale du navigateur. Sois concis et utilise le Markdown. Réponds dans la langue de l'utilisateur.",
         optTitle: "Quill - Options",
         optSubtitle: "Barre latérale IA pour Firefox",
@@ -118,7 +136,9 @@ const strings = {
         errNetworkOllama: "Impossible de joindre Ollama. Est-il lancé, avec OLLAMA_ORIGINS=moz-extension://* ?",
         errTimeout: "{p} a mis trop de temps à répondre.",
         errEmpty: "{p} a renvoyé une réponse vide.",
-        errHttp: "Erreur {p} (HTTP {s})."
+        errHttp: "Erreur {p} (HTTP {s}).",
+        errVision: "Le modèle **{m}** ne lit peut-être pas les images : choisissez un modèle de vision (Claude, gpt-4o, Mistral-Small-3.2, gemma, llava…).",
+        errImageLoad: "Impossible de charger les images."
     }
 };
 
