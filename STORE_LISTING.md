@@ -49,14 +49,15 @@ Sister project of Quill for Thunderbird.
 
 | Field | Value |
 |---|---|
-| Categories | **Language Support** and **Other** |
+| Categories (up to 3) | **Language Support** and **Social & Communication** |
 | Support website | `https://github.com/mikecastrodemaria/Quill-Firefox` |
 | Support email | optional — leave empty or use a project address |
-| License | **GNU General Public License v3.0** |
-| Requires payment / non-free service | Check **"This add-on may require payment for non-free services"** only if you want to warn that Anthropic / OpenAI keys are paid (OVHcloud anonymous tier and Ollama are free) |
+| License | **GNU General Public License v3.0 only** |
+| Experimental | Leave unchecked |
+| Requires payment, non-free services… | Leave unchecked: OVHcloud anonymous tier and Ollama are free (Anthropic / OpenAI keys are optional) |
 | Tags | `ai`, `chatgpt`, `claude`, `sidebar`, `summarize`, `translate` |
 
-**Privacy policy** — paste the content of [PRIVACY.md](PRIVACY.md) (AMO takes the text directly), or this short version:
+**Privacy policy** — check **This add-on has a Privacy Policy**, then paste the content of [PRIVACY.md](PRIVACY.md) (AMO takes the text directly), or this short version:
 
 ```
 Quill does not collect, store or transmit any data to its developers. API keys and settings are stored locally in your browser. When you send a message, it is sent directly to the AI provider you configured (Anthropic, OpenAI, OVHcloud or your own Ollama server). When you turn on "Page" or use a quick action, the title, URL and text of the current page (or the selected text) are included in that request. Each provider's own privacy policy applies to the data it receives. The conversation is kept only for the current browser session.
