@@ -132,9 +132,13 @@ Produces `web-ext-artifacts/quill-firefox-<version>.xpi`. Release Firefox only a
 
 Use `--channel listed` instead to publish on addons.mozilla.org (requires a listing and a privacy policy).
 
+### Publish on addons.mozilla.org
+
+Listing texts, reviewer notes and permission justifications: [STORE_LISTING.md](STORE_LISTING.md). Privacy policy: [PRIVACY.md](PRIVACY.md).
+
 ### Data collection
 
-`manifest.json` declares `data_collection_permissions` (required by addons.mozilla.org): `websiteContent` and `browsingActivity`, because the text and URL of a page are sent to the AI provider you configured when you use **Page** or a quick action. Firefox shows this at install time. Publish a privacy policy before submitting to AMO.
+`manifest.json` declares `data_collection_permissions` (required by addons.mozilla.org): `websiteContent` and `browsingActivity`, because the text and URL of a page are sent to the AI provider you configured when you use **Page** or a quick action. Firefox shows this at install time. Privacy policy: [PRIVACY.md](PRIVACY.md).
 
 ## License
 
