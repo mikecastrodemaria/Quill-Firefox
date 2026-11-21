@@ -109,9 +109,30 @@ Quill-Firefox/
 
 ## Package / publish
 
+### Unsigned package (testing)
+
 ```powershell
-npx web-ext build --source-dir . --ignore-files "*.md"
+npx web-ext build --source-dir . --ignore-files "*.md" ".gitignore" --overwrite-dest --filename "quill-firefox-{version}.xpi"
 ```
+
+Produces `web-ext-artifacts/quill-firefox-<version>.xpi`. Release Firefox only accepts it as a temporary add-on; Developer Edition / Nightly accept it permanently with `xpinstall.signatures.required = false`.
+
+### Signed package (self-distribution, not listed on AMO)
+
+1. Get your API credentials at <https://addons.mozilla.org/developers/addon/api/key/> (JWT issuer + JWT secret). Never commit them.
+2. Bump `version` in `manifest.json` if this version was already signed (AMO refuses to sign the same version twice).
+3. Run, in PowerShell:
+   ```powershell
+   $env:WEB_EXT_API_KEY = Read-Host "JWT issuer"
+   $env:WEB_EXT_API_SECRET = Read-Host "JWT secret"
+   npx web-ext sign --source-dir . --channel unlisted --ignore-files "*.md" ".gitignore"
+   ```
+4. Mozilla validates and signs the add-on (usually a few minutes); the signed `.xpi` is downloaded into `web-ext-artifacts/`.
+5. Install it in any Firefox ≥ 140: drag the `.xpi` onto a Firefox window, or `about:addons` → ⚙ → **Install Add-on From File…**.
+
+Use `--channel listed` instead to publish on addons.mozilla.org (requires a listing and a privacy policy).
+
+### Data collection
 
 `manifest.json` declares `data_collection_permissions` (required by addons.mozilla.org): `websiteContent` and `browsingActivity`, because the text and URL of a page are sent to the AI provider you configured when you use **Page** or a quick action. Firefox shows this at install time. Publish a privacy policy before submitting to AMO.
 
